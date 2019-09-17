@@ -314,7 +314,7 @@ def _xmlrpc_thread(method, args, callback, errback=None):
         for part in parts:
             proxy = getattr(proxy, part)
         return callback(proxy(*args))
-    except xmlrpclib.Fault, e:
+    except xmlrpclib.Fault as e:
         if e.faultCode == 404:
             e = UnknownAppID()
         if errback is not None:

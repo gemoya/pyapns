@@ -227,7 +227,7 @@ class Notification(object):
         def binaryify(t):
             try:
                 return t.decode('hex')
-            except TypeError, e:
+            except TypeError as e:
                 raise ValueError(
                     'token "{}" could not be decoded: {}'.format(str(t), str(e)
                 ))

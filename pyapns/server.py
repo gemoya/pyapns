@@ -272,7 +272,7 @@ class APNSService(service.Service):
                 return r
 
             factory.deferred.addBoth(cancel_timeout)
-        except Exception, e:
+        except Exception as e:
             log.err('APNService feedback error initializing: %s' % str(e))
             raise
         return factory.deferred
