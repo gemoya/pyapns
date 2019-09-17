@@ -248,7 +248,7 @@ def reprovision_and_retry(func):
                         provision(
                             *initial)  # retry provisioning the initial setup
                     func(*a, **kw)  # and try the function once more
-                except Exception, new_exc:
+                except Exception as new_exc:
                     errback(new_exc)  # throwing the new exception
             else:
                 errback(e)  # not an instance of UnknownAppID - nothing we can do here
