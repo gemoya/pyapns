@@ -3,7 +3,12 @@ import _json as json
 import struct
 import binascii
 import datetime
-from StringIO import StringIO as _StringIO
+
+try:
+    from StringIO import StringIO as _StringIO ## for Python 2
+except ImportError:
+    from io import StringIO as _StringIO ## for Python 3
+
 from OpenSSL import SSL, crypto
 from twisted.internet import reactor, defer
 from twisted.internet.protocol import (
