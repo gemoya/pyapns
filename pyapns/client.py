@@ -1,4 +1,4 @@
-import xmlrpclib
+import xmlrpc.client
 import threading
 import httplib
 import functools
@@ -314,7 +314,7 @@ def _xmlrpc_thread(method, args, callback, errback=None):
         for part in parts:
             proxy = getattr(proxy, part)
         return callback(proxy(*args))
-    except xmlrpclib.Fault as e:
+    except xmlrpc.client.Fault as e:
         if e.faultCode == 404:
             e = UnknownAppID()
         if errback is not None:
@@ -332,10 +332,10 @@ def ServerProxy(url, *args, **kwargs):
     t = TimeoutTransport()
     t.timeout = kwargs.pop('timeout', 20)
     kwargs['transport'] = t
-    return xmlrpclib.ServerProxy(url, *args, **kwargs)
+    return xmlrpc.client.ServerProxy(url, *args, **kwargs)
 
 
-class TimeoutTransport(xmlrpclib.Transport):
+class TimeoutTransport(xmlrpc.client.Transport):
     def make_connection(self, host):
         if hexversion < 0x02070000:
             conn = TimeoutHTTP(host)
