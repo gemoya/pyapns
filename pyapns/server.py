@@ -17,7 +17,8 @@ from twisted.internet.ssl import ClientContextFactory
 from twisted.application import service
 from twisted.protocols.basic import LineReceiver
 from twisted.python import log
-from zope.interface import Interface, implements
+from zope.interface import Interface
+from zope.interface import declarators
 from twisted.web import xmlrpc
 
 
@@ -184,12 +185,12 @@ class APNSClientFactory(ReconnectingClientFactory):
         ReconnectingClientFactory.clientConnectionLost(self, connector, reason)
 
 
+@implementer(IAPNSService)
 class APNSService(service.Service):
     """ A Service that sends notifications and receives
     feedback from the Apple Push Notification Service
     """
 
-    implements(IAPNSService)
     clientProtocolFactory = APNSClientFactory
     feedbackProtocolFactory = APNSFeedbackClientFactory
 
