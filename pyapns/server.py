@@ -203,10 +203,10 @@ class APNSService(service.Service):
 
     def write(self, notifications):
         "Connect to the APNS service and send notifications"
-	if self.factory: 
+        if self.factory:
             conn_time = datetime.datetime.now() - self.factory_connect_time
             if conn_time > MAX_CONNECTION_TIME:
-            	log.msg('APNSService write (disconnecting based on max connection time)')
+                log.msg('APNSService write (disconnecting based on max connection time)')
                 self.factory.clientProtocol.transport.loseConnection()
                 self.factory.stopTrying()
                 self.factory = None
