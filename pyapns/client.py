@@ -1,6 +1,6 @@
 import xmlrpc.client
 import threading
-import httplib
+from six.moves import http_client
 import functools
 from sys import hexversion
 import requests
@@ -346,13 +346,13 @@ class TimeoutTransport(xmlrpc.client.Transport):
         return conn
 
 
-class TimeoutHTTPConnection(httplib.HTTPConnection):
+class TimeoutHTTPConnection(http_client.HTTPConnection):
     def connect(self):
-        httplib.HTTPConnection.connect(self)
+        http_client.HTTPConnection.connect(self)
         self.sock.settimeout(self.timeout)
 
 
-class TimeoutHTTP(httplib.HTTP):
+class TimeoutHTTP(http_client.HTTP):
     _connection_class = TimeoutHTTPConnection
 
     def set_timeout(self, timeout):
