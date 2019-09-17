@@ -18,7 +18,7 @@ from twisted.application import service
 from twisted.protocols.basic import LineReceiver
 from twisted.python import log
 from zope.interface import Interface
-from zope.interface import declarations
+from zope.interface.declarations import implementer
 from twisted.web import xmlrpc
 
 
